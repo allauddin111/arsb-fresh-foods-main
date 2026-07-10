@@ -18,41 +18,29 @@ export const Route = createFileRoute("/contact")({
 
 function ContactPage() {
   const [sent, setSent] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const bodyRef = useScrollReveal<HTMLDivElement>();
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitting(true);
-    setError(null);
 
     const formData = new FormData(e.currentTarget);
-    
-    // We add the web3forms access key
-    // You can get a free key from https://web3forms.com/
-    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "YOUR_ACCESS_KEY_HERE";
-    formData.append("access_key", accessKey);
-    formData.append("from_name", "ARSB Trading Contact Form");
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const phone = formData.get("phone") as string;
+    const subject = formData.get("subject") as string;
+    const message = formData.get("message") as string;
 
-    try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formData
-      });
+    const emailRecipient = "arsbtrading@gmail.com";
+    const emailSubject = encodeURIComponent(subject || `Website Enquiry from ${name}`);
+    const emailBody = encodeURIComponent(
+      `Name: ${name}\n` +
+      `Email: ${email}\n` +
+      `Phone: ${phone || "N/A"}\n\n` +
+      `Message:\n${message}`
+    );
 
-      const data = await response.json();
-
-      if (data.success) {
-        setSent(true);
-      } else {
-        setError(data.message || "Something went wrong. Please try again.");
-      }
-    } catch (err) {
-      setError("Failed to connect to the email server. Please check your internet connection and try again.");
-    } finally {
-      setSubmitting(false);
-    }
+    window.location.href = `mailto:${emailRecipient}?subject=${emailSubject}&body=${emailBody}`;
+    setSent(true);
   };
 
   return (
@@ -171,11 +159,6 @@ function ContactPage() {
               </div>
             ) : (
               <div className="mt-6 grid sm:grid-cols-2 gap-4">
-                {error && (
-                  <div className="sm:col-span-2 p-4 rounded-xl bg-red-500/20 text-red-100 border border-red-500/30 text-sm">
-                    {error}
-                  </div>
-                )}
                 <Field label="Your Name">
                   <input required name="name" className="contact-input" placeholder="Full name" />
                 </Field>
@@ -201,10 +184,9 @@ function ContactPage() {
                 </div>
                 <button
                   type="submit"
-                  disabled={submitting}
-                  className="sm:col-span-2 group inline-flex items-center justify-center gap-2 rounded-full bg-accent text-accent-foreground px-7 py-3.5 font-semibold hover:scale-[1.03] hover:shadow-lg hover:shadow-accent/30 transition-all duration-300 mt-2 disabled:opacity-50 disabled:pointer-events-none"
+                  className="sm:col-span-2 group inline-flex items-center justify-center gap-2 rounded-full bg-accent text-accent-foreground px-7 py-3.5 font-semibold hover:scale-[1.03] hover:shadow-lg hover:shadow-accent/30 transition-all duration-300 mt-2"
                 >
-                  {submitting ? "Sending..." : "Send Message"}
+                  Send Message
                   <Send className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5" />
                 </button>
               </div>
