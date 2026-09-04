@@ -1,6 +1,6 @@
 export function InstagramButton() {
   const instagramHandle = "arsbtradingllc";
-  const instagramUrl = `https://ig.me/m/${instagramHandle}`;
+  const instagramUrl = `https://www.instagram.com/${instagramHandle}/`;
 
   return (
     <>
@@ -35,7 +35,7 @@ export function InstagramButton() {
       <div className="group flex items-center gap-3">
         {/* Tooltip */}
         <div className="opacity-0 pointer-events-none translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 ease-out whitespace-nowrap flex items-center gap-1.5 bg-leaf-deep text-primary-foreground text-sm font-semibold px-4 py-2.5 rounded-full shadow-xl shadow-leaf-deep/30">
-          <span>Chat on Instagram</span>
+          <span>Visit Instagram Profile</span>
         </div>
 
         {/* Button */}
@@ -44,8 +44,8 @@ export function InstagramButton() {
           target="_blank"
           rel="noopener noreferrer"
           className="ig-btn flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] shadow-lg hover:brightness-110 transition-all duration-200"
-          aria-label="Chat on Instagram (@arsbtradingllc)"
-          title="Chat with us on Instagram @arsbtradingllc"
+          aria-label="Visit Instagram profile (@arsbtradingllc)"
+          title="Visit our Instagram profile @arsbtradingllc"
         >
           <span className="ig-icon">
             <svg

@@ -40,7 +40,7 @@ function ContactPage() {
       i: Instagram, 
       t: "Instagram",            
       d: "@arsbtradingllc", 
-      links: ["https://ig.me/m/arsbtradingllc"] 
+      links: ["https://www.instagram.com/arsbtradingllc/"] 
     },
     { 
       i: MapPin, 
