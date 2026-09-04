@@ -8,6 +8,7 @@ import {
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { WhatsAppButton } from "@/components/site/WhatsAppButton";
+import { InstagramButton } from "@/components/site/InstagramButton";
 
 function NotFoundComponent() {
   return (
@@ -83,7 +84,10 @@ function RootComponent() {
           <Outlet />
         </main>
         <Footer />
-        <WhatsAppButton />
+        <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3.5">
+          <InstagramButton />
+          <WhatsAppButton />
+        </div>
       </div>
     </QueryClientProvider>
   );

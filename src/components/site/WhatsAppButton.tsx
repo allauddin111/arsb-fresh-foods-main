@@ -12,16 +12,12 @@ export function WhatsAppButton() {
         }
         @keyframes wa-float {
           0%, 100% { transform: translateY(0px); }
-          50%       { transform: translateY(-7px); }
+          50%       { transform: translateY(-6px); }
         }
         @keyframes wa-icon-bounce {
           0%, 100% { transform: scale(1); }
           40%       { transform: scale(1.18) rotate(-8deg); }
           60%       { transform: scale(1.12) rotate(5deg); }
-        }
-        @keyframes wa-tooltip-in {
-          from { opacity: 0; transform: translateX(8px); }
-          to   { opacity: 1; transform: translateX(0); }
         }
 
         .wa-btn {
@@ -33,23 +29,11 @@ export function WhatsAppButton() {
         .wa-btn:hover .wa-icon {
           animation: wa-icon-bounce 0.5s ease;
         }
-        .wa-tooltip {
-          opacity: 0;
-          pointer-events: none;
-          transform: translateX(8px);
-          transition: opacity 0.2s ease, transform 0.25s ease;
-          white-space: nowrap;
-        }
-        .wa-btn:hover .wa-tooltip {
-          opacity: 1;
-          transform: translateX(0);
-          animation: wa-tooltip-in 0.25s ease forwards;
-        }
       `}</style>
 
-      <div className="fixed bottom-6 right-6 z-50 flex items-center gap-3">
+      <div className="group flex items-center gap-3">
         {/* Tooltip */}
-        <div className="wa-tooltip flex items-center gap-1.5 bg-leaf-deep text-primary-foreground text-sm font-semibold px-4 py-2.5 rounded-full shadow-xl shadow-leaf-deep/30">
+        <div className="opacity-0 pointer-events-none translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 ease-out whitespace-nowrap flex items-center gap-1.5 bg-leaf-deep text-primary-foreground text-sm font-semibold px-4 py-2.5 rounded-full shadow-xl shadow-leaf-deep/30">
           <span>Chat on WhatsApp</span>
         </div>
 
